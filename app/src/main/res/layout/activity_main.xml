@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <TextView
+        android:id="@+id/albumHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_padding"
+        android:text="@string/album"
+        android:textAllCaps="true"
+        android:textSize="@dimen/text_size_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_size_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumHeading"
+        tools:text="One More Night Live" />
+
+    <TextView
+        android:id="@+id/artistTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_padding"
+        android:layout_marginTop="@dimen/mini_padding"
+        android:text="@string/artist"
+        android:textSize="@dimen/text_size_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/album" />
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mini_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_size_heading"
+        app:layout_constraintStart_toEndOf="@id/artistTitle"
+        app:layout_constraintTop_toBottomOf="@id/album"
+        tools:text="Linkin Park" />
+
+    <TextView
+        android:id="@+id/releaseYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_padding"
+        android:layout_marginTop="@dimen/mini_padding"
+        android:textSize="@dimen/text_size_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistTitle"
+        tools:text="2017" />
+
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_padding"
+        android:layout_marginTop="@dimen/mini_padding"
+        android:textSize="@dimen/text_size_heading"
+        app:layout_constraintStart_toEndOf="@id/releaseYear"
+        app:layout_constraintTop_toBottomOf="@id/artistTitle"
+        tools:text="alternative" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/play"
+        style="@style/Widget.AppTheme.PlayButton.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mini_padding"
+        android:layout_marginTop="@dimen/mini_padding"
+        android:contentDescription="@string/play"
+        app:icon="@drawable/baseline_play_circle_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/releaseYear"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pause"
+        style="@style/Widget.AppTheme.PlayButton.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mini_padding"
+        android:layout_marginTop="@dimen/mini_padding"
+        android:contentDescription="@string/play"
+        app:icon="@drawable/baseline_pause_circle_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/releaseYear"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/play"
+        tools:listitem="@layout/card_song" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
