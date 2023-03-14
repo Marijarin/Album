@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         lifecycle.addObserver(mediaObserver)
 
-        binding.pause.visibility = View.GONE
+        binding.pause.visibility = View.INVISIBLE
 
         val adapter = SongsAdapter(object : OnInteractionListener {
             override fun onPlay(song: Song) {
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 binding.play.visibility = View.VISIBLE
             }
         })
-
+        binding.list.adapter = adapter
         lifecycleScope.launchWhenCreated {
             viewModel.data.collectLatest(adapter::submitList)
             binding.album.text = viewModel.loadAlbum()
@@ -53,9 +53,17 @@ class MainActivity : AppCompatActivity() {
                 .map { it.artist }
                 .last()
                 .toString()
+            binding.genre.text = viewModel.loadAlbum()
+                .map { it.genre }
+                .last()
+                .toString()
+            binding.releaseYear.text = viewModel.loadAlbum()
+                .map { it.published }
+                .last()
+                .toString()
 
         }
-        binding.list.adapter = adapter
+
 
         binding.play.setOnClickListener {
             binding.pause.visibility = View.VISIBLE

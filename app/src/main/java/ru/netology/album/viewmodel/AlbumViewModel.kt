@@ -34,17 +34,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
             throw e.fillInStackTrace()
         }
     }
-    fun playSong(song: Song): Flow<ResponseBody> = flow{
-        try{
-            val response = AlbumApi.retrofitService.getSong(song.file)
-            if (!response.isSuccessful) {
-                throw Error(response.message())
-            }
-            val file = response.body() ?: throw Error(response.message())
-            emit(file)
-        } catch (e: Exception) {
-            throw e.fillInStackTrace()
-        }
+    fun playSong(song: Song){
         mediaObserver.apply {
             player?.setDataSource(
                 "${BASE_URL}${song.file}"

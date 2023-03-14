@@ -44,7 +44,7 @@
             android:layout_marginStart="@dimen/mini_padding"
             android:layout_marginTop="@dimen/padding"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/play"
+
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Talking to Myself" />
 

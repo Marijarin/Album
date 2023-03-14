@@ -39,7 +39,7 @@ class SongViewHolder(
     fun bind(song: Song) {
         binding.pause.visibility = View.GONE
         binding.apply {
-            name.text = itemId.toString()
+            name.text = song.file
             //album.text = song.album
             play.setOnClickListener{
                 it.visibility = View.GONE
