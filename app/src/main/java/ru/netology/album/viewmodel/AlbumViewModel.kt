@@ -2,8 +2,10 @@ package ru.netology.album.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import okhttp3.ResponseBody
+import okhttp3.internal.toImmutableList
 import ru.netology.album.api.AlbumApi
 import ru.netology.album.dto.Album
 import ru.netology.album.dto.Song
@@ -11,16 +13,18 @@ import ru.netology.album.ui.MediaLifecycleObserver
 
 class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     private val mediaObserver = MediaLifecycleObserver()
-    companion object{
+
+    companion object {
         private const val BASE_URL =
-        "https://raw.githubusercontent.com/netology-code/andad-homeworks/master/09_multimedia/data/"
+            "https://raw.githubusercontent.com/netology-code/andad-homeworks/master/09_multimedia/data/"
     }
 
     val data: Flow<List<Song>>
-    get() = loadAlbum().map { it.tracks }
+        get() = loadAlbum().map { it.tracks }
+
     init {
-            loadAlbum()
-        }
+        loadAlbum()
+    }
 
     fun loadAlbum(): Flow<Album> = flow {
         try {
@@ -34,15 +38,30 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
             throw e.fillInStackTrace()
         }
     }
-    fun playSong(song: Song){
+
+    fun playSong(song: Song) {
         mediaObserver.apply {
-            player?.setDataSource(
-                "${BASE_URL}${song.file}"
-            )
+            if (player != null && player!!.isPlaying) {
+                player?.stop()
+                player?.reset()
+                player?.setDataSource(
+                    "${BASE_URL}${song.file}"
+                )
+            } else {
+                player?.setDataSource(
+                    "${BASE_URL}${song.file}"
+                )
+            }
         }.play()
     }
+
     fun pauseSong() {
-        mediaObserver.player?.pause()
+        mediaObserver.apply {
+            if (player != null) {
+                player?.stop()
+                player?.reset()
+            }
+        }
     }
 
 

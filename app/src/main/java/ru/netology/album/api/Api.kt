@@ -15,10 +15,7 @@ interface ApiService {
     @GET("album.json")
     suspend fun getAlbum(): Response<Album>
 
-    @GET("{file}")
-    suspend fun getSong(@Path("file") file: String): Response<ResponseBody>
-
-}
+    }
     object AlbumApi {
         private const val BASE_URL =
             "https://raw.githubusercontent.com/netology-code/andad-homeworks/master/09_multimedia/data/"

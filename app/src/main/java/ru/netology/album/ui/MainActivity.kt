@@ -24,22 +24,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
+        binding.pauseL.visibility = View.INVISIBLE
         setContentView(view)
         lifecycle.addObserver(mediaObserver)
+        mediaObserver.apply {
+            player?.isLooping
 
-        binding.pause.visibility = View.INVISIBLE
+        }
+
+
 
         val adapter = SongsAdapter(object : OnInteractionListener {
             override fun onPlay(song: Song) {
-                viewModel.playSong(song)
-                binding.play.visibility = View.GONE
-                binding.pause.visibility = View.VISIBLE
-            }
+                    viewModel.playSong(song)
 
+            }
             override fun onPause(song: Song) {
                 viewModel.pauseSong()
-                binding.pause.visibility = View.GONE
-                binding.play.visibility = View.VISIBLE
             }
         })
         binding.list.adapter = adapter
@@ -64,17 +65,16 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-        binding.play.setOnClickListener {
-            binding.pause.visibility = View.VISIBLE
+        binding.playL.setOnClickListener {
             it.visibility = View.GONE
-
+            binding.pauseL.visibility = View.VISIBLE
             viewModel.playSong(adapter.currentList.first())
+
         }
 
-        binding.pause.setOnClickListener {
+        binding.pauseL.setOnClickListener {
             it.visibility = View.GONE
-            binding.play.visibility = View.VISIBLE
+            binding.playL.visibility = View.VISIBLE
             viewModel.pauseSong()
         }
     }

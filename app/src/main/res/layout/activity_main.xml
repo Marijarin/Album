@@ -73,7 +73,7 @@
         tools:text="alternative" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/play"
+        android:id="@+id/playL"
         style="@style/Widget.AppTheme.PlayButton.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,10 +82,10 @@
         android:contentDescription="@string/play"
         app:icon="@drawable/baseline_play_circle_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/releaseYear"
-        />
+        app:layout_constraintTop_toBottomOf="@id/releaseYear" />
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/pause"
+        android:id="@+id/pauseL"
         style="@style/Widget.AppTheme.PlayButton.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,18 +94,22 @@
         android:contentDescription="@string/play"
         app:icon="@drawable/baseline_pause_circle_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/releaseYear"
-        />
+        app:layout_constraintTop_toBottomOf="@id/releaseYear" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="playL, pauseL"
+        app:layout_constraintBottom_toTopOf="@id/list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/play"
+        app:layout_constraintTop_toTopOf="@id/barrier"
         tools:listitem="@layout/card_song" />
 
 

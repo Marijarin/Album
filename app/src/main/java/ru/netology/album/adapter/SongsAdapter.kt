@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.album.R
 import ru.netology.album.databinding.CardSongBinding
 import ru.netology.album.dto.Song
 
@@ -40,15 +41,16 @@ class SongViewHolder(
         binding.pause.visibility = View.GONE
         binding.apply {
             name.text = song.file
-            //album.text = song.album
-            play.setOnClickListener{
+            play.setOnClickListener {
                 it.visibility = View.GONE
                 pause.visibility = View.VISIBLE
-                onInteractionListener.onPlay(song)}
+                onInteractionListener.onPlay(song)
+            }
             pause.setOnClickListener {
                 it.visibility = View.GONE
                 play.visibility = View.VISIBLE
-                onInteractionListener.onPause(song)}
+                onInteractionListener.onPause(song)
+            }
         }
     }
 
