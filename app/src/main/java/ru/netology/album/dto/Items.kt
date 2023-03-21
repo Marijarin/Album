@@ -4,6 +4,7 @@ data class Song(
     val id: Int,
     val file: String,
     val album: String,
+    var playing: Boolean = false
 )
 
 data class Album(

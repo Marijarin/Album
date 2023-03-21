@@ -64,5 +64,16 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun pauseSong(song: Song) {
+        if (song.playing) {
+            mediaObserver.apply {
+                if (player != null) {
+                    player?.stop()
+                    player?.reset()
+                }
+            }
+        }
+    }
+
 
 }
