@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import ru.netology.album.adapter.OnInteractionListener
 import ru.netology.album.adapter.SongsAdapter
 import ru.netology.album.databinding.ActivityMainBinding
@@ -36,11 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = SongsAdapter(object : OnInteractionListener {
             override fun onPlay(song: Song) {
+                if (viewModel.data.filter { it.any { song.playing } }.toString().isNotEmpty()){
+                    viewModel.pauseSong()
+                    viewModel.playSong(song)
+                } else
                     viewModel.playSong(song)
 
             }
             override fun onPause(song: Song) {
-                viewModel.pauseSong()
+                viewModel.pauseSong(song)
             }
         })
         binding.list.adapter = adapter
