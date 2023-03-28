@@ -3,6 +3,7 @@ package ru.netology.album.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -40,24 +41,20 @@ class SongViewHolder(
 
 
     fun bind(song: Song) {
-        binding.pause.visibility = View.GONE
         binding.apply {
             name.text = song.file
+            album.text = song.album
+            play.isVisible = !song.playing
+            pause.isVisible = song.playing
             play.setOnClickListener {
-                it.visibility = View.GONE
-                pause.visibility = View.VISIBLE
                 onInteractionListener.onPlay(song)
-            }
-            if (play.isActivated) {
-                song.playing = true
             }
 
             pause.setOnClickListener {
-                song.playing = false
-                it.visibility = View.GONE
-                play.visibility = View.VISIBLE
                 onInteractionListener.onPause(song)
             }
+
+
         }
     }
 

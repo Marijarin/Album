@@ -29,40 +29,30 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
         val adapter = SongsAdapter(object : OnInteractionListener {
             override fun onPlay(song: Song) {
-                if (viewModel.data.filter { it.any { song.playing } }.toString().isNotEmpty()){
+                if (viewModel.data.filter { album -> album?.tracks?.any{it.playing} == true }.toString().isNotEmpty()) {
                     viewModel.pauseSong()
                     viewModel.playSong(song)
                 } else
                     viewModel.playSong(song)
-
             }
+
             override fun onPause(song: Song) {
                 viewModel.pauseSong(song)
+
             }
         })
         binding.list.adapter = adapter
         lifecycleScope.launchWhenCreated {
-            viewModel.data.collectLatest(adapter::submitList)
-            binding.album.text = viewModel.loadAlbum()
-                .map { it.title }
-                .last()
-                .toString()
-            binding.artist.text = viewModel.loadAlbum()
-                .map { it.artist }
-                .last()
-                .toString()
-            binding.genre.text = viewModel.loadAlbum()
-                .map { it.genre }
-                .last()
-                .toString()
-            binding.releaseYear.text = viewModel.loadAlbum()
-                .map { it.published }
-                .last()
-                .toString()
+            viewModel.data.collectLatest {
+                binding.album.text = it?.title
+                binding.artist.text = it?.artist
+                binding.genre.text = it?.genre
+                binding.releaseYear.text = it?.published
+                adapter.submitList(it?.tracks)
+            }
+
 
         }
 
@@ -72,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.playSong(adapter.currentList.first())
 
         }
-
         binding.pauseL.setOnClickListener {
             it.visibility = View.GONE
             binding.playL.visibility = View.VISIBLE
