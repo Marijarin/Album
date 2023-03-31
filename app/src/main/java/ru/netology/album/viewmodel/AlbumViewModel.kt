@@ -18,7 +18,6 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     private val _data = MutableStateFlow<Album?>(null)
     val data: Flow<Album?> = _data.asStateFlow()
 
-
     companion object {
         private const val BASE_URL =
             "https://raw.githubusercontent.com/netology-code/andad-homeworks/master/09_multimedia/data/"
@@ -36,9 +35,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
                     throw Error(response.message())
                 }
                 val album = response.body() ?: throw Error(response.message())
-
                 _data.value = album.copy(tracks = album.tracks.map { it.copy(album = album.title) })
-
             } catch (e: Exception) {
                 throw e.fillInStackTrace()
             }
@@ -46,7 +43,6 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun playSong(song: Song) {
-
         mediaObserver.apply {
             if (player != null && player!!.isPlaying) {
                 player?.stop()
@@ -60,9 +56,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
                 )
             }
         }.play()
-        _data.value = _data.value?.apply {tracks.map { it.copy(playing = it.id == song.id) }
-
-        }
+        _data.value= _data.value?.run {copy (tracks = tracks.map{it.copy(playing = it.id == song.id)})}
 
     }
 
@@ -74,11 +68,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
                 player?.reset()
             }
         }
-        _data.value = _data.value?.apply {
-            tracks.map {
-                it.copy(playing = false)
-            }
-        }
+        _data.value= _data.value?.run {copy (tracks = tracks.map{it.copy(playing = false)}) }
 
 
     }
@@ -91,11 +81,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
                     player?.reset()
                 }
             }
-            _data.value = _data.value?.apply {
-                tracks.map {
-                    it.copy(playing = false)
-                }
-            }
+            _data.value= _data.value?.run {copy (tracks = tracks.map{it.copy(playing = false)}) }
         }
 
     }

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/mini_padding"
             android:layout_marginTop="@dimen/mini_padding"
-            android:contentDescription="@string/play"
+            android:contentDescription="@string/pause"
             app:icon="@drawable/baseline_pause_circle_24"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +59,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Talking to Myself" />
+
+
 
 
 

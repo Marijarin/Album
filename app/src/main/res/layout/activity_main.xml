@@ -102,15 +102,29 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="playL, pauseL"
-        app:layout_constraintBottom_toTopOf="@id/list" />
+        />
+
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/common_padding"
+        android:paddingTop="@dimen/common_padding"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/cardview_shadow_start_color"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"
         tools:listitem="@layout/card_song" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

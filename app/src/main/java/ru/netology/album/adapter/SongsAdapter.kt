@@ -3,6 +3,7 @@ package ru.netology.album.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,7 +16,6 @@ import ru.netology.album.dto.Song
 interface OnInteractionListener {
     fun onPlay(song: Song) {}
     fun onPause(song: Song) {}
-    //fun onClick(song: Song) {}
 }
 
 class SongsAdapter(

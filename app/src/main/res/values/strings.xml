@@ -3,4 +3,5 @@
     <string name="album">Album</string>
     <string name="artist">Artist: </string>
     <string name="play">Play</string>
+    <string name="pause">Pause</string>
 </resources>

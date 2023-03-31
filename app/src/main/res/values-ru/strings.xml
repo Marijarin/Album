@@ -4,4 +4,5 @@
     <string name="album">Альбом</string>
     <string name="artist">"Исполнитель: "</string>
     <string name="play">Проигрывать</string>
+    <string name="pause">Остановить</string>
 </resources>
